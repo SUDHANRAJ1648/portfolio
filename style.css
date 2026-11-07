@@ -1203,11 +1203,20 @@ body.custom-cursor-active textarea { cursor: text; }
 
 .portrait__tag-dot {
   width: 5px;
+  flex: 0 0 5px;
   height: 5px;
   border-radius: 50%;
   background: var(--cyan);
   box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
   animation: portraitPulse 2.6s ease-in-out infinite;
+}
+
+/* Hover copy only makes sense on devices that can actually hover */
+.portrait__tag-touch { display: none; }
+
+@media (hover: none) {
+  .portrait__tag-hover { display: none; }
+  .portrait__tag-touch { display: inline; }
 }
 
 @keyframes portraitPulse {
