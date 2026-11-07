@@ -218,6 +218,6 @@ Verified locally with Chrome DevTools Protocol at 390 × 844, 768 × 1024 and 14
 
 - [Three.js](https://threejs.org/) r128 — MIT
 - [GSAP](https://greensock.com/gsap/) 3.12.5 + ScrollTrigger — standard "no charge" license
-- Fonts: Space Grotesk and JetBrains Mono via Google Fonts
+- Fonts: Space Grotesk and JetBrains Mono via Google Fonts, plus Anton for the hero name layers
 
 All content, project descriptions and claims belong to Sudhan Raj M.
