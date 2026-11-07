@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sudhan Raj M — Resume</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #172033;
+    font-size: 9.7pt;
+    line-height: 1.36;
+    background: #fff;
+  }
+  a { color: #1b5fbe; text-decoration: none; }
+  h1 { margin: 0; font-size: 23pt; letter-spacing: -0.8pt; color: #0b1730; }
+  .role { margin: 2px 0 4px; font-size: 10.5pt; font-weight: 600; color: #1b5fbe; letter-spacing: .2pt; }
+  .contact { font-size: 8.6pt; color: #465673; }
+  .contact span { margin: 0 5px; color: #a8b4c8; }
+  header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; border-bottom: 2px solid #0b1730; padding-bottom: 9px; }
+  .monogram {
+    width: 48px; height: 48px; flex: 0 0 auto; border-radius: 10px;
+    display: grid; place-items: center; font-family: Consolas, monospace;
+    font-size: 15pt; font-weight: 700; color: #fff;
+    background: linear-gradient(135deg, #0b1730, #1b5fbe);
+  }
+  h2 {
+    margin: 8px 0 4px; padding-bottom: 3px; border-bottom: 1px solid #d7deea;
+    font-size: 9.4pt; text-transform: uppercase; letter-spacing: 1.4pt; color: #0b1730;
+  }
+  p { margin: 0 0 5px; }
+  .muted { color: #4c5c78; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .item { margin-bottom: 6px; }
+  .item-head { display: flex; justify-content: space-between; gap: 14px; }
+  .item-head strong { font-size: 10pt; color: #0b1730; }
+  .item-head em { font-style: normal; font-size: 8.4pt; color: #5a6a86; white-space: nowrap; }
+  .sub { font-size: 8.8pt; color: #1b5fbe; font-weight: 600; }
+  ul { margin: 3px 0 0; padding-left: 13px; }
+  li { margin-bottom: 2px; }
+  .skills { display: grid; grid-template-columns: 72px 1fr; gap: 3px 10px; }
+  .skills b { color: #0b1730; font-size: 8.8pt; }
+  .skills span { color: #3e4d67; }
+  .project { margin-bottom: 5px; }
+  .project strong { color: #0b1730; font-size: 9.8pt; }
+  .project .stack { color: #1b5fbe; font-size: 8.3pt; font-weight: 600; }
+  .project p { font-size: 8.8pt; color: #44536d; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+  .pill { display: inline-block; padding: 1px 6px; border: 1px solid #d7e2f2; border-radius: 10px; font-size: 8pt; color: #1b5fbe; margin: 0 3px 3px 0; background: #f4f8fd; }
+  footer { margin-top: 8px; padding-top: 4px; border-top: 1px solid #d7deea; font-size: 7.6pt; color: #7b879c; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>SUDHAN RAJ M</h1>
+    <p class="role">Software Developer &nbsp;|&nbsp; Web Developer &nbsp;|&nbsp; Problem Solver</p>
+    <p class="contact">
+      India <span>•</span>
+      <a href="mailto:sudhanraj1648@gmail.com">sudhanraj1648@gmail.com</a>
+      <span>•</span>
+      <a href="https://github.com/SUDHANRAJ1648">github.com/SUDHANRAJ1648</a><br>
+      <a href="https://www.linkedin.com/in/sudhan-raj-7514b4381/">linkedin.com/in/sudhan-raj-7514b4381</a>
+      <span>•</span>
+      <a href="https://leetcode.com/u/Sudhanraj/">leetcode.com/u/Sudhanraj</a>
+    </p>
+  </div>
+  <div class="monogram">SR</div>
+</header>
+
+<h2>Profile</h2>
+<p>Software developer passionate about creating useful digital solutions and developing web applications. Currently pursuing a B.E. in Computer Science and Engineering, with hands-on experience building full-stack systems across rental management, examination seating, library circulation and emergency blood support. Comfortable turning requirements into working interfaces, APIs and data flows, and continuously improving programming and problem-solving skills.</p>
+
+<h2>Education</h2>
+<div class="item">
+  <div class="item-head"><strong>B.E. Computer Science and Engineering</strong><em>2025 — 2029</em></div>
+  <div class="sub">Francis Xavier Engineering College</div>
+  <p class="muted">Currently pursuing.</p>
+</div>
+<div class="item">
+  <div class="item-head"><strong>Higher Secondary Certificate (HSC)</strong><em>2023 — 2025</em></div>
+  <div class="sub">MDT Hindu College Higher Secondary School</div>
+</div>
+<div class="item">
+  <div class="item-head"><strong>Secondary School Leaving Certificate (SSLC)</strong><em>2021 — 2023</em></div>
+  <div class="sub">Kings Matric School</div>
+</div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <b>Frontend</b><span>HTML5, CSS3, JavaScript (DOM, responsive UI, animation)</span>
+  <b>Backend</b><span>Node.js, Express.js, REST APIs, authentication and sessions</span>
+  <b>Database</b><span>Supabase, Firebase, MySQL</span>
+  <b>Programming</b><span>Python, C, Java</span>
+  <b>Other</b><span>QR code integration, problem solving, teamwork</span>
+</div>
+
+<h2>Selected Projects</h2>
+
+<div class="project">
+  <div class="item-head"><strong>RentMate — Rental Management Platform</strong><em><a href="https://rentmate-pee5.onrender.com">Live project</a></em></div>
+  <div class="stack">Node.js · Express.js · MySQL · JavaScript</div>
+  <p>Renter payment management with monthly receipt visibility, maintenance/problem requests and owner communication.</p>
+</div>
+
+<div class="project">
+  <div class="item-head"><strong>Smart Examination Hall Seating Management System</strong><em>Academic project</em></div>
+  <div class="stack">Node.js · Express.js · MySQL · JavaScript</div>
+  <p>Automatic seating arrangement from Excel uploads, hall capacity management, anti-cheating constraints, roll-number search and invigilator reports.</p>
+</div>
+
+<div class="project">
+  <div class="item-head"><strong>Smart Library Management System</strong><em>Academic project</em></div>
+  <div class="stack">Node.js · Express.js · Supabase · QR Code</div>
+  <p>Unique QR identity for every book copy, issue/return workflows, student and librarian roles, fine calculation and QR-based tracking.</p>
+</div>
+
+<div class="project">
+  <div class="item-head"><strong>AI-Based Blood Bank Management System</strong><em>Academic project</em></div>
+  <div class="stack">HTML5 · CSS3 · JavaScript · QR Code</div>
+  <p>Blood availability tracking, hospital requests, nearby emergency donor discovery, QR-based donor information and emergency support.</p>
+</div>
+
+<div class="two-col">
+  <div>
+    <h2>Certifications</h2>
+    <ul>
+      <li>Programming in Java</li>
+      <li>Basic Power BI</li>
+      <li>Soft Skills and Communication Skills Training</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Achievements</h2>
+    <ul>
+      <li>2nd Prize — Hackathon</li>
+      <li>1st Prize — Inter-college Cricket Competition</li>
+      <li>Participated in a Technical Symposium (Paper Presentation)</li>
+      <li>Member of NSS and NCC</li>
+      <li>Organised cultural and technical events</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Interests</h2>
+<p>Data structures and algorithms, web development, backend engineering, problem solving, chess, cricket and reading.</p>
+
+<footer>References and project repositories available on request. Portfolio: GitHub above.</footer>
+</body>
+</html>
