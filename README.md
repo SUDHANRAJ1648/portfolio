@@ -8,7 +8,7 @@ An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla 
 
 | Section | Highlights |
 | --- | --- |
-| **Hero** | Black-and-red first screen with an oversized red name signature behind the cut-out portrait; 360° rotating portrait (CSS 3D) with cursor-following light, soft shadow, hover-to-pause; interactive 3D laptop workstation, code screen, floating `{ }`, `</>`, `01` symbols, particles, mouse parallax, three CTAs |
+| **Hero** | Oversized gradient name signature behind the cut-out portrait, in the site's navy/cyan/violet palette; 360° rotating portrait (CSS 3D) with cursor-following light, soft shadow, hover-to-pause; interactive 3D laptop workstation, code screen, floating `{ }`, `</>`, `01` symbols, particles, mouse parallax, three CTAs |
 | **About** | Lazy-loaded 3D icosahedron profile object, tilt/spotlight card, factual intro and quick facts |
 | **Skills** | Frontend, Backend, Database and Programming cards with hover tilt and brand chips |
 | **Work** | Four projects with interactive 3D CSS previews, category filters and accessible case-study modals |
@@ -164,7 +164,7 @@ Because the site is fully static, Vercel serves `index.html` directly with no co
 - **Custom cursor** with contextual labels on desktop fine-pointer devices only.
 - **GSAP reveal animations** with `once: true` ScrollTriggers and an IntersectionObserver fallback.
 - **3D tilt and spotlight** on skill cards, project previews and the code window.
-- **Black-and-red hero**: the first screen uses a crimson-on-black palette with the name set as an oversized red signature layered behind the portrait. All of these rules are scoped to `.hero`, so the rest of the page keeps the navy/cyan design.
+- **Hero name signature**: the name is set as an oversized signature layered behind the portrait, filled with the same `--cyan` → `--blue` → `--violet` gradient used across the page. All of its rules are scoped to `.hero`, so every other section is untouched.
 - **360° portrait**: a background-free cut-out of Sudhan rotates continuously around its vertical axis (28 s, CSS `rotateY` + `preserve-3d`). It has a mirrored, tinted back face, a cursor-following specular light, a soft ground shadow that narrows as it turns edge-on, a cyan light blade at the 90°/270° moments, and it pauses while hovered and resumes on leave. On tablets and phones it stacks above the headline and the desk composition is hidden.
 - **Project filters** (All / Platforms / Systems) and **case-study modal** with focus trapping, Escape-to-close and focus restoration.
 - **Contact form** validates name, email and message, then opens a pre-filled `mailto:` message. Nothing is sent to a third party.
