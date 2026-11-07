@@ -3674,6 +3674,292 @@ body.custom-cursor-active textarea { cursor: text; }
 }
 ::-webkit-scrollbar-thumb:hover { background: #27507f; }
 
+/* ==========================================================================
+   23. Hero — black & red premium theme
+   Every selector below is scoped to the first screen (.hero / .portrait__*)
+   so About, Skills, Work, Coding, Journey and Contact keep their original
+   navy/cyan styling untouched.
+   ========================================================================== */
+
+.hero {
+  --hero-red: #ff2f42;
+  --hero-red-soft: #ff8a95;
+  --hero-red-deep: #9d0d1c;
+  --hero-red-glow: rgba(255, 47, 66, 0.42);
+  --hero-ink: #050406;
+
+  background:
+    radial-gradient(ellipse 60% 56% at 76% 42%, rgba(158, 10, 26, 0.34), transparent 68%),
+    radial-gradient(ellipse 48% 44% at 16% 22%, rgba(112, 8, 18, 0.20), transparent 72%),
+    linear-gradient(180deg, #0a0607 0%, #060405 58%, var(--hero-ink) 100%);
+}
+
+/* Vignette re-tinted for the dark red room; still hands off to the page bg */
+.hero__vignette {
+  background:
+    linear-gradient(90deg, rgba(5, 4, 6, 0.96) 0%, rgba(5, 4, 6, 0.72) 34%, rgba(5, 4, 6, 0.10) 62%, rgba(5, 4, 6, 0.52) 100%),
+    linear-gradient(180deg, rgba(5, 4, 6, 0.55) 0%, transparent 22%, transparent 60%, var(--bg) 100%);
+}
+
+/* The WebGL desk is ambience — push the cyan/blue palette to warm crimson */
+.hero__canvas {
+  opacity: 0.5;
+  filter: grayscale(1) sepia(1) hue-rotate(-38deg) saturate(3.4) brightness(0.72) contrast(1.05);
+}
+
+.hero__canvas.is-ready { opacity: 0.5; }
+
+.hero__fallback {
+  filter: grayscale(1) sepia(1) hue-rotate(-38deg) saturate(3) brightness(0.85);
+}
+
+.hero__scanlines {
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 79, 92, 0.028) 3px 4px);
+}
+
+/* ---------- 23a. Oversized red signature behind the portrait ---------- */
+.hero__nameplate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: 152%;
+  display: block;
+  transform: translate(calc(-50% + var(--nptx, 0px)), calc(-52% + var(--npty, 0px)));
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.78;
+  letter-spacing: -0.045em;
+  font-size: clamp(54px, 9.4vw, 132px);
+  color: transparent;
+  background: linear-gradient(178deg, #ff6472 0%, #ff2f42 34%, #c11326 64%, #6d0712 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px rgba(255, 124, 134, 0.16);
+  filter:
+    drop-shadow(0 18px 46px rgba(190, 12, 30, 0.42))
+    drop-shadow(0 0 26px rgba(255, 47, 66, 0.20));
+  opacity: 0.92;
+}
+
+.hero__nameplate-line { display: block; }
+
+.hero__nameplate-line + .hero__nameplate-line {
+  margin-top: -0.05em;
+  padding-left: 0.14em;
+}
+
+/* ---------- 23b. Portrait lighting in red ---------- */
+.portrait__aura {
+  background:
+    radial-gradient(ellipse 42% 30% at 50% 20%, rgba(255, 70, 85, 0.26), transparent 72%),
+    radial-gradient(ellipse 58% 46% at 50% 62%, rgba(168, 15, 30, 0.30), transparent 74%);
+}
+
+.portrait__halo {
+  background:
+    radial-gradient(ellipse 50% 56% at 50% 50%, rgba(6, 3, 4, 0.96), rgba(6, 3, 4, 0.60) 54%, transparent 80%),
+    radial-gradient(circle at 50% 18%, rgba(255, 47, 66, 0.14), transparent 58%);
+}
+
+.portrait__edge {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 205, 210, 0.95) 16%,
+    #ff2f42 50%,
+    rgba(255, 205, 210, 0.95) 84%,
+    transparent
+  );
+  box-shadow:
+    0 0 16px rgba(255, 47, 66, 0.9),
+    0 0 44px rgba(196, 16, 34, 0.6);
+}
+
+.portrait__face--front img {
+  filter:
+    drop-shadow(0 30px 44px rgba(0, 0, 0, 0.70))
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.50))
+    drop-shadow(0 0 30px rgba(255, 47, 66, 0.22));
+}
+
+.portrait__face--back img {
+  filter:
+    brightness(0.40)
+    saturate(0.65)
+    drop-shadow(0 22px 38px rgba(0, 0, 0, 0.60));
+}
+
+.portrait__face--back::after {
+  background: linear-gradient(200deg, rgba(255, 79, 92, 0.66), rgba(140, 10, 24, 0.58));
+  opacity: 0.6;
+}
+
+/* Red rim light hugging the silhouette (front side only) */
+.portrait__face--front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 36% 64% at 98% 42%, rgba(255, 64, 82, 0.62), transparent 64%),
+    radial-gradient(ellipse 30% 54% at 2% 58%, rgba(255, 47, 66, 0.34), transparent 66%);
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  -webkit-mask-image: url("assets/my-photo.png");
+  mask-image: url("assets/my-photo.png");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.portrait__light {
+  background: radial-gradient(
+    circle 46% at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.46),
+    rgba(255, 170, 178, 0.18) 38%,
+    transparent 62%
+  );
+}
+
+.portrait__scan {
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(255, 79, 92, 0.20) 47%,
+    rgba(255, 240, 240, 0.10) 50%,
+    rgba(255, 79, 92, 0.16) 53%,
+    transparent 60%
+  );
+}
+
+.portrait__shadow {
+  background:
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0, 0, 0, 0.88), rgba(24, 2, 4, 0.34) 52%, transparent 74%),
+    radial-gradient(ellipse 46% 90% at 50% 50%, rgba(255, 47, 66, 0.30), transparent 76%);
+}
+
+.portrait__tag {
+  border-color: rgba(255, 79, 92, 0.18);
+  background: rgba(20, 5, 7, 0.60);
+  color: #bda7aa;
+}
+
+.portrait__tag-dot {
+  background: var(--hero-red);
+  box-shadow: 0 0 10px rgba(255, 47, 66, 0.9);
+}
+
+/* ---------- 23c. Hero copy, controls and meta in the red palette ---------- */
+.hero .eyebrow { color: #a99a9d; }
+
+.hero .eyebrow__line {
+  background: linear-gradient(90deg, var(--hero-red), transparent);
+}
+
+.hero .eyebrow__sep { color: rgba(255, 138, 149, 0.55); }
+
+.hero__hello { color: rgba(255, 138, 149, 0.85); }
+
+.hero__name {
+  background: linear-gradient(100deg, #fff5f5 0%, #ffd9dc 34%, #ff8a95 70%, #ff2f42 100%);
+  background-size: 180% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__roles { color: #d8c9cb; }
+
+.hero__roles i {
+  color: var(--hero-red);
+  opacity: 0.75;
+}
+
+.hero__tagline { color: #f4e9ea; }
+.hero__desc { color: #a79a9d; }
+
+.hero__meta { border-top-color: rgba(255, 79, 92, 0.14); }
+.hero__meta-key { color: rgba(255, 138, 149, 0.55); }
+.hero__meta-value { color: #dfd2d4; }
+
+.hero .status-dot {
+  background: var(--hero-red);
+  animation-name: heroStatusPulse;
+}
+
+@keyframes heroStatusPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(255, 47, 66, 0.14), 0 0 10px rgba(255, 47, 66, 0.70); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 47, 66, 0.05), 0 0 20px rgba(255, 47, 66, 0.95); }
+}
+
+.hero__hud { color: rgba(255, 138, 149, 0.62); }
+
+.hero__scroll:hover { color: var(--hero-red-soft); }
+.hero__scroll-line { background: rgba(255, 79, 92, 0.18); }
+.hero__scroll-line::after { background: linear-gradient(180deg, transparent, var(--hero-red)); }
+
+.hero .btn--primary {
+  background: linear-gradient(100deg, #ff3a4c, #c40b1e);
+  color: #fff5f6;
+  box-shadow: 0 16px 44px -18px rgba(255, 47, 66, 0.85);
+}
+
+.hero .btn--primary::before {
+  background: linear-gradient(100deg, #ff6f7c, #ff2f42);
+}
+
+.hero .btn--primary:hover {
+  box-shadow: 0 22px 54px -18px rgba(255, 47, 66, 0.95);
+}
+
+.hero .btn--glass {
+  background: rgba(26, 6, 9, 0.58);
+  border-color: rgba(255, 79, 92, 0.24);
+  color: #ffe9eb;
+}
+
+.hero .btn--glass:hover {
+  background: rgba(42, 8, 13, 0.74);
+  border-color: rgba(255, 79, 92, 0.52);
+  color: #fff;
+}
+
+.hero .btn--quiet { color: #c9b6b9; }
+.hero .btn--quiet:hover { color: #fff; }
+
+/* ---------- 23d. Responsive nameplate ---------- */
+@media (max-width: 1180px) {
+  .hero__nameplate { width: 158%; font-size: clamp(54px, 10vw, 118px); }
+}
+
+@media (max-width: 980px) {
+  .hero__nameplate {
+    width: 176%;
+    top: 47%;
+    font-size: clamp(56px, 14vw, 104px);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__nameplate {
+    width: 196%;
+    top: 45%;
+    font-size: clamp(46px, 16.5vw, 74px);
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero__nameplate { width: 210%; font-size: clamp(42px, 16vw, 64px); }
+}
+
 @media print {
   .loader,
   .site-header,
@@ -3684,6 +3970,7 @@ body.custom-cursor-active textarea { cursor: text; }
   .hero__stage,
   .hero__scroll,
   .hero__hud,
+  .hero__nameplate,
   .marquee,
   .coding__symbols,
   .contact__orb,

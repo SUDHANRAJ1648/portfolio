@@ -408,6 +408,7 @@
   if (portrait && heroSection && finePointer && !reduceMotion) {
     var pAura = $('.portrait__aura', portrait);
     var pHalo = $('.portrait__halo', portrait);
+    var pName = $('.hero__nameplate', portrait);
     var pTargetRX = 0, pTargetRY = 0, pTargetX = 0, pTargetY = 0;
     var pCurRX = 0, pCurRY = 0, pCurX = 0, pCurY = 0;
     var pRaf = null;
@@ -428,6 +429,10 @@
       }
       if (pHalo) {
         pHalo.style.transform = 'translate3d(' + (pCurX * -0.6).toFixed(2) + 'px, ' + (pCurY * -0.6).toFixed(2) + 'px, 0)';
+      }
+      if (pName) {
+        pName.style.setProperty('--nptx', (pCurX * -0.85).toFixed(2) + 'px');
+        pName.style.setProperty('--npty', (pCurY * -0.7).toFixed(2) + 'px');
       }
 
       if (Math.abs(pTargetRX - pCurRX) > 0.02 || Math.abs(pTargetRY - pCurRY) > 0.02 ||
