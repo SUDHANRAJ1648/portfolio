@@ -21,6 +21,7 @@
   <meta name="twitter:description" content="Building digital experiences through code.">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" as="image" href="assets/my-photo.png" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -216,6 +217,42 @@
               <span class="hero__meta-value"><i class="status-dot"></i> Open to opportunities</span>
             </div>
           </div>
+        </div>
+
+        <!-- 360° portrait -->
+        <div class="hero__portrait portrait" id="portrait">
+          <div class="portrait__aura" aria-hidden="true"></div>
+          <div class="portrait__halo" aria-hidden="true"></div>
+
+          <div class="portrait__stage">
+            <div class="portrait__shadow" aria-hidden="true"></div>
+            <span class="portrait__edge" aria-hidden="true"></span>
+            <div class="portrait__tilt" id="portraitTilt">
+              <div class="portrait__spin" id="portraitSpin">
+                <div class="portrait__face portrait__face--front">
+                  <img
+                    class="portrait__img"
+                    src="assets/my-photo.png"
+                    alt="Portrait of Sudhan Raj M"
+                    width="860"
+                    height="1116"
+                    fetchpriority="high"
+                    decoding="async">
+                  <span class="portrait__light" aria-hidden="true"></span>
+                  <span class="portrait__scan" aria-hidden="true"></span>
+                </div>
+                <div class="portrait__face portrait__face--back" aria-hidden="true">
+                  <img src="assets/my-photo.png" alt="" width="860" height="1116" decoding="async">
+                  <span class="portrait__light portrait__light--soft"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="portrait__tag" aria-hidden="true">
+            <i class="portrait__tag-dot"></i>
+            <span>360° portrait — hover to pause</span>
+          </p>
         </div>
       </div>
 

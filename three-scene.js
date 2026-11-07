@@ -414,10 +414,12 @@
     workstation.add(deskTopGlow);
 
     var legMaterial = new THREE.MeshStandardMaterial({ color: 0x050c18, metalness: 0.7, roughness: 0.4 });
+    var legMeshes = [];
     [-2.45, 2.45].forEach(function (x) {
       var leg = new THREE.Mesh(new THREE.BoxGeometry(0.16, 1.3, 2.2), legMaterial);
       leg.position.set(x, -2.2, 0);
       workstation.add(leg);
+      legMeshes.push(leg);
     });
 
     /* Desk mug */
@@ -607,6 +609,9 @@
       nodeGroup.add(node);
     }
 
+    /* Props that only make sense next to the large desktop hero composition */
+    var deskParts = [desk, deskTopGlow, mug, laptop, ringGroup, nodeGroup].concat(legMeshes);
+
     /* Particles */
     var particleCount = mobile ? 260 : 620;
     var positions = new Float32Array(particleCount * 3);
@@ -721,8 +726,14 @@
       } else if (window.innerWidth < 980) {
         layout = { x: 1.1, y: -0.05, z: -0.3, scale: 0.94, cameraZ: 10.4, lookX: 0.35, lookY: 0 };
       } else {
-        layout = { x: 2.1, y: -0.15, z: 0, scale: 1, cameraZ: 9.9, lookX: 0.55, lookY: -0.05 };
+        layout = { x: 1.78, y: -1.3, z: -0.45, scale: 1, cameraZ: 10.2, lookX: 0.42, lookY: -0.3 };
       }
+
+      /* Below the desktop breakpoint the portrait owns the hero, so the desk
+         composition steps aside and only the floating symbols remain. */
+      var showDesk = window.innerWidth >= 1180;
+      for (var i = 0; i < deskParts.length; i++) deskParts[i].visible = showDesk;
+
       currentLayout = Object.assign({}, layout);
       workstation.position.set(layout.x, layout.y, layout.z);
       workstation.scale.setScalar(layout.scale);
