@@ -32,6 +32,7 @@
 
   function setScrollLock(locked) {
     body.style.overflow = locked ? 'hidden' : '';
+    body.classList.toggle('menu-open', Boolean(locked));
   }
 
   /* ---------------------------------------------------------------------
@@ -110,11 +111,10 @@
     var tl = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
     tl.to('.hero__eyebrow', { opacity: 1, y: 0, duration: 0.7 }, 0)
       .from('.hero__hello', { opacity: 0, y: 18, duration: 0.7 }, 0.05)
-      .from('.hero__name', {
-        opacity: 0,
-        yPercent: 28,
-        clipPath: 'inset(0 0 100% 0)',
-        duration: 1.15,
+      .from('.hero__name-line', {
+        yPercent: 116,
+        duration: 1.25,
+        stagger: 0.12,
         ease: 'expo.out'
       }, 0.12)
       .from('.hero__roles', { opacity: 0, y: 16, duration: 0.65 }, 0.4)
@@ -122,7 +122,10 @@
       .to('.hero__desc', { opacity: 1, y: 0, duration: 0.75 }, 0.68)
       .to('.hero__actions', { opacity: 1, y: 0, duration: 0.75 }, 0.82)
       .to('.hero__meta', { opacity: 1, y: 0, duration: 0.75 }, 0.94)
-      .from('.hero__portrait', { opacity: 0, y: 26, duration: 1.1, ease: 'power3.out' }, 0.05)
+      .from('.hero__portrait-wrap', { opacity: 0, y: 34, duration: 1.15, ease: 'power3.out' }, 0.05)
+      .from('.hero__rail-link', { opacity: 0, x: 12, stagger: 0.06, duration: 0.5 }, 0.85)
+      .from('.hero__top', { opacity: 0, y: -10, duration: 0.7 }, 0.2)
+      .from('.hero__ticker', { opacity: 0, duration: 0.9 }, 1.1)
       .from('.hero__hud-item', { opacity: 0, y: -8, stagger: 0.08, duration: 0.5 }, 0.4)
       .from('.hero__scroll', { opacity: 0, y: 10, duration: 0.6 }, 1.15);
   }
@@ -155,6 +158,23 @@
   window.addEventListener('scroll', requestScrollFrame, { passive: true });
   window.addEventListener('resize', requestScrollFrame, { passive: true });
   onScrollFrame();
+
+  /* The editorial hero is light, so the fixed header and cursor invert while
+     it is on screen, then return to the site's dark styling further down. */
+  var heroViewport = $('.hero');
+
+  function syncHeroView() {
+    if (!heroViewport) return;
+    /* Stay light until the hero has fully left the viewport, so the dark header
+       never appears on top of the light hero while it is still visible. */
+    var limit = heroViewport.offsetHeight - 2;
+    var y = window.scrollY || window.pageYOffset;
+    body.classList.toggle('hero-in-view', y < limit);
+  }
+
+  window.addEventListener('scroll', syncHeroView, { passive: true });
+  window.addEventListener('resize', syncHeroView, { passive: true });
+  syncHeroView();
 
   var navLinks = $$('.nav-link');
   var sections = $$('main section[id]');
@@ -409,6 +429,7 @@
     var pAura = $('.portrait__aura', portrait);
     var pHalo = $('.portrait__halo', portrait);
     var pName = $('.hero__nameplate', portrait);
+    var pCurvesSvg = $('.hero__curves-svg', heroSection);
     var pTargetRX = 0, pTargetRY = 0, pTargetX = 0, pTargetY = 0;
     var pCurRX = 0, pCurRY = 0, pCurX = 0, pCurY = 0;
     var pRaf = null;
@@ -429,6 +450,10 @@
       }
       if (pHalo) {
         pHalo.style.transform = 'translate3d(' + (pCurX * -0.6).toFixed(2) + 'px, ' + (pCurY * -0.6).toFixed(2) + 'px, 0)';
+      }
+      if (pCurvesSvg) {
+        /* The line field drifts against the pointer, one layer behind the portrait */
+        pCurvesSvg.style.transform = 'translate3d(' + (pCurX * -1.15).toFixed(2) + 'px, ' + (pCurY * -0.85).toFixed(2) + 'px, 0)';
       }
       if (pName) {
         pName.style.setProperty('--nptx', (pCurX * -0.85).toFixed(2) + 'px');
@@ -474,6 +499,73 @@
       pTargetX = 0;
       pTargetY = 0;
       startPortrait();
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     Editorial hero — scroll parallax and magnetic buttons
+     --------------------------------------------------------------------- */
+  var noriHero = $('.hero--nori');
+  if (noriHero && !reduceMotion && hasGSAP) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
+    function heroScrollCfg() {
+      return {
+        trigger: noriHero,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.8
+      };
+    }
+
+    var curveFar = $('.hero__curves-group--far', noriHero);
+    var curveNear = $('.hero__curves-group--near', noriHero);
+    var noriName = $('.hero__name', noriHero);
+    var noriPortrait = $('.hero__portrait-wrap', noriHero);
+
+    if (curveFar) {
+      window.gsap.to(curveFar, { yPercent: -14, ease: 'none', scrollTrigger: heroScrollCfg() });
+    }
+    if (curveNear) {
+      window.gsap.to(curveNear, { yPercent: 20, ease: 'none', scrollTrigger: heroScrollCfg() });
+    }
+    if (noriName) {
+      window.gsap.to(noriName, { yPercent: -7, ease: 'none', scrollTrigger: heroScrollCfg() });
+    }
+    if (noriPortrait) {
+      window.gsap.to(noriPortrait, { yPercent: 6, ease: 'none', scrollTrigger: heroScrollCfg() });
+    }
+  }
+
+  if (finePointer && !reduceMotion) {
+    $$('.hero--nori .hero__btn').forEach(function (btn) {
+      var mRaf = null;
+      var mTargetX = 0, mTargetY = 0, mCurX = 0, mCurY = 0;
+
+      function magnetFrame() {
+        mCurX += (mTargetX - mCurX) * 0.18;
+        mCurY += (mTargetY - mCurY) * 0.18;
+        btn.style.transform = 'translate3d(' + mCurX.toFixed(2) + 'px, ' + mCurY.toFixed(2) + 'px, 0)';
+
+        if (Math.abs(mTargetX - mCurX) > 0.1 || Math.abs(mTargetY - mCurY) > 0.1) {
+          mRaf = window.requestAnimationFrame(magnetFrame);
+        } else {
+          mRaf = null;
+        }
+      }
+
+      btn.addEventListener('pointermove', function (event) {
+        var rect = btn.getBoundingClientRect();
+        mTargetX = ((event.clientX - rect.left) / rect.width - 0.5) * 9;
+        mTargetY = ((event.clientY - rect.top) / rect.height - 0.5) * 6;
+        if (!mRaf) mRaf = window.requestAnimationFrame(magnetFrame);
+      });
+
+      btn.addEventListener('pointerleave', function () {
+        mTargetX = 0;
+        mTargetY = 0;
+        if (!mRaf) mRaf = window.requestAnimationFrame(magnetFrame);
+      });
     });
   }
 

@@ -32,6 +32,11 @@
     return;
   }
 
+  /* The editorial homepage hero is a light, type-led composition and does not
+     use the WebGL workstation. Skip building it (the About scene still runs). */
+  var heroEditorial = Boolean(document.querySelector('.hero--nori'));
+  if (heroEditorial && heroCanvas) heroCanvas.style.display = 'none';
+
   var clock = new THREE.Clock();
   var hero = null;
   var about = null;
@@ -1113,7 +1118,7 @@
      Boot
      --------------------------------------------------------------------- */
   try {
-    initHero();
+    if (!heroEditorial) initHero();
   } catch (error) {
     document.documentElement.classList.add('no-webgl');
   }

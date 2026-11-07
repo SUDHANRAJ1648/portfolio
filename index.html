@@ -141,7 +141,8 @@
   <main id="main">
 
     <!-- ============================= HERO ============================= -->
-    <section class="hero" id="home" aria-labelledby="heroTitle">
+    <section class="hero hero--nori" id="home" aria-labelledby="heroTitle">
+      <!-- Kept for the WebGL module; visually retired on the editorial hero -->
       <div class="hero__stage" aria-hidden="true">
         <canvas id="heroCanvas" class="hero__canvas"></canvas>
         <div class="hero__fallback" id="heroFallback">
@@ -158,113 +159,172 @@
         <div class="hero__scanlines"></div>
       </div>
 
+      <!-- Abstract curved line field -->
+      <div class="hero__curves" aria-hidden="true">
+        <svg class="hero__curves-svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" fill="none">
+          <g class="hero__curves-group hero__curves-group--far">
+            <path class="hero__curve" d="M-80 706C240 486 556 622 826 486S1326 262 1680 442" stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+            <path class="hero__curve" d="M-80 828C286 638 690 772 1012 622S1428 438 1680 566" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <circle class="hero__curve" cx="1292" cy="536" r="322" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <circle class="hero__curve" cx="1292" cy="536" r="404" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          </g>
+          <g class="hero__curves-group hero__curves-group--near">
+            <path class="hero__curve hero__curve--ink" d="M-80 438C226 306 508 540 892 512S1350 336 1680 478" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path class="hero__curve hero__curve--lime hero__curve--dash" d="M-80 520C266 372 604 596 968 520S1394 372 1680 520" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+            <path class="hero__curve hero__curve--lime" d="M964 132C1128 42 1372 64 1548 232" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+            <path class="hero__curve hero__curve--ink" d="M-80 176C198 74 430 190 612 120" stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+            <circle cx="1548" cy="232" r="5.5" fill="currentColor" class="hero__curve-dot hero__curve--lime"/>
+          </g>
+        </svg>
+        <span class="hero__grain"></span>
+      </div>
+
       <div class="hero__hud" aria-hidden="true">
         <span class="hero__hud-item"><i class="status-dot"></i> SYSTEM ONLINE</span>
         <span class="hero__hud-item">WEBGL / 3D</span>
       </div>
 
-      <div class="container hero__layout">
-        <div class="hero__content">
+      <div class="hero__inner">
+        <div class="hero__top">
           <p class="eyebrow hero__eyebrow">
             <span class="eyebrow__line" aria-hidden="true"></span>
-            Software Developer <span class="eyebrow__sep">/</span> India
+            Portfolio <span class="eyebrow__sep">/</span> 2026
           </p>
-
-          <h1 class="hero__title" id="heroTitle">
-            <span class="hero__hello">Hello, I'm</span>
-            <span class="hero__name">Sudhan Raj M</span>
-          </h1>
-
-          <p class="hero__roles" aria-label="Software Developer, Web Developer, Problem Solver">
-            <span>Software Developer</span><i>/</i>
-            <span>Web Developer</span><i>/</i>
-            <span>Problem Solver</span>
+          <p class="hero__status">
+            <span class="hero__status-dot" aria-hidden="true"></span>
+            Available for opportunities
           </p>
-
-          <p class="hero__tagline">Building digital experiences<br class="hero__br"> through code.</p>
-
-          <p class="hero__desc">
-            I turn ideas into fast, accessible web applications — from clean interfaces
-            and thoughtful interactions to the APIs and data layers behind them.
-          </p>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#work">
-              <span>View My Projects</span>
-              <svg class="icon" aria-hidden="true"><use href="#icon-arrow-down"></use></svg>
-            </a>
-            <a class="btn btn--glass" href="assets/resume/Sudhan_Raj_M_Resume.pdf" download>
-              <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-              <span>Download Resume</span>
-            </a>
-            <a class="btn btn--quiet" href="#contact">
-              <svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>
-              <span>Contact Me</span>
-            </a>
-          </div>
-
-          <div class="hero__meta">
-            <div class="hero__meta-item">
-              <span class="hero__meta-key">Based in</span>
-              <span class="hero__meta-value">India</span>
-            </div>
-            <div class="hero__meta-item">
-              <span class="hero__meta-key">Focus</span>
-              <span class="hero__meta-value">Full-stack web</span>
-            </div>
-            <div class="hero__meta-item">
-              <span class="hero__meta-key">Status</span>
-              <span class="hero__meta-value"><i class="status-dot"></i> Open to opportunities</span>
-            </div>
-          </div>
         </div>
 
-        <!-- 360° portrait -->
-        <div class="hero__portrait portrait" id="portrait">
-          <span class="hero__nameplate" aria-hidden="true">
-            <span class="hero__nameplate-line">Sudhan</span>
-            <span class="hero__nameplate-line">Raj M</span>
-          </span>
-          <div class="portrait__aura" aria-hidden="true"></div>
-          <div class="portrait__halo" aria-hidden="true"></div>
+        <div class="hero__layout">
+          <div class="hero__content">
+            <h1 class="hero__title" id="heroTitle">
+              <span class="hero__hello">Software Developer</span>
+              <span class="hero__name">
+                <span class="hero__name-mask"><span class="hero__name-line">Sudhan</span></span>
+                <span class="hero__name-mask hero__name-mask--accent"><span class="hero__name-line hero__name-line--accent">Raj M</span></span>
+              </span>
+            </h1>
 
-          <div class="portrait__stage">
-            <div class="portrait__shadow" aria-hidden="true"></div>
-            <span class="portrait__edge" aria-hidden="true"></span>
-            <div class="portrait__tilt" id="portraitTilt">
-              <div class="portrait__spin" id="portraitSpin">
-                <div class="portrait__face portrait__face--front">
-                  <img
-                    class="portrait__img"
-                    src="assets/my-photo.png"
-                    alt="Portrait of Sudhan Raj M"
-                    width="860"
-                    height="1116"
-                    fetchpriority="high"
-                    decoding="async">
-                  <span class="portrait__light" aria-hidden="true"></span>
-                  <span class="portrait__scan" aria-hidden="true"></span>
-                </div>
-                <div class="portrait__face portrait__face--back" aria-hidden="true">
-                  <img src="assets/my-photo.png" alt="" width="860" height="1116" decoding="async">
-                  <span class="portrait__light portrait__light--soft"></span>
+            <p class="hero__roles" aria-label="Software Developer, Web Developer, Problem Solver">
+              <span>Software Developer</span><i>/</i>
+              <span>Web Developer</span><i>/</i>
+              <span>Problem Solver</span>
+            </p>
+
+            <p class="hero__tagline">Building digital experiences<br class="hero__br"> through code.</p>
+
+            <p class="hero__desc">
+              I turn ideas into fast, accessible web applications — from clean interfaces
+              and thoughtful interactions to the APIs and data layers behind them.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn hero__btn hero__btn--solid" href="#work">
+                <span>Explore Projects</span>
+                <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+              </a>
+              <a class="btn hero__btn hero__btn--ghost" href="#contact">
+                <span>Contact Me</span>
+                <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </div>
+
+            <div class="hero__meta">
+              <div class="hero__meta-item">
+                <span class="hero__meta-key">Based in</span>
+                <span class="hero__meta-value">India</span>
+              </div>
+              <div class="hero__meta-item">
+                <span class="hero__meta-key">Focus</span>
+                <span class="hero__meta-value">Full-stack web</span>
+              </div>
+              <div class="hero__meta-item">
+                <span class="hero__meta-key">Status</span>
+                <span class="hero__meta-value"><i class="status-dot"></i> Open to opportunities</span>
+              </div>
+            </div>
+
+            <a class="hero__scroll" href="#about" aria-label="Scroll to about section">
+              <span class="hero__scroll-line" aria-hidden="true"></span>
+              <span>Scroll to explore</span>
+            </a>
+          </div>
+
+          <!-- 360° portrait -->
+          <div class="hero__portrait-wrap">
+            <div class="hero__portrait portrait" id="portrait">
+              <span class="hero__arch" aria-hidden="true"></span>
+              <span class="hero__arch-ring" aria-hidden="true"></span>
+
+              <div class="portrait__aura" aria-hidden="true"></div>
+              <div class="portrait__halo" aria-hidden="true"></div>
+
+              <div class="portrait__stage">
+                <div class="portrait__shadow" aria-hidden="true"></div>
+                <span class="portrait__edge" aria-hidden="true"></span>
+                <div class="portrait__tilt" id="portraitTilt">
+                  <div class="portrait__spin" id="portraitSpin">
+                    <div class="portrait__face portrait__face--front">
+                      <img
+                        class="portrait__img"
+                        src="assets/my-photo.png"
+                        alt="Portrait of Sudhan Raj M"
+                        width="860"
+                        height="1116"
+                        fetchpriority="high"
+                        decoding="async">
+                      <span class="portrait__light" aria-hidden="true"></span>
+                    </div>
+                    <div class="portrait__face portrait__face--back" aria-hidden="true">
+                      <img src="assets/my-photo.png" alt="" width="860" height="1116" decoding="async">
+                      <span class="portrait__light portrait__light--soft"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <p class="portrait__tag" aria-hidden="true">
+                <i class="portrait__tag-dot"></i>
+                <span class="portrait__tag-hover">360° — hover to pause</span>
+                <span class="portrait__tag-touch">360° — live</span>
+              </p>
             </div>
           </div>
 
-          <p class="portrait__tag" aria-hidden="true">
-            <i class="portrait__tag-dot"></i>
-            <span class="portrait__tag-hover">360° portrait — hover to pause</span>
-            <span class="portrait__tag-touch">360° portrait — live</span>
-          </p>
+          <aside class="hero__rail" aria-label="Social links">
+            <span class="hero__rail-label" aria-hidden="true">Connect</span>
+            <div class="hero__rail-links">
+              <a class="hero__rail-link" href="https://github.com/SUDHANRAJ1648" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                <svg class="icon" aria-hidden="true"><use href="#icon-github"></use></svg>
+              </a>
+              <a class="hero__rail-link" href="https://www.linkedin.com/in/sudhan-raj-7514b4381/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+              </a>
+              <a class="hero__rail-link" href="https://leetcode.com/u/Sudhanraj/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode profile">
+                <svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg>
+              </a>
+              <a class="hero__rail-link" href="mailto:sudhanraj1648@gmail.com" aria-label="Email Sudhan Raj M">
+                <svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>
+              </a>
+              <a class="hero__rail-link" href="assets/resume/Sudhan_Raj_M_Resume.pdf" download aria-label="Download résumé">
+                <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+              </a>
+            </div>
+          </aside>
         </div>
       </div>
 
-      <a class="hero__scroll" href="#about" aria-label="Scroll to about section">
-        <span class="hero__scroll-line" aria-hidden="true"></span>
-        <span>Scroll to explore</span>
-      </a>
+      <div class="hero__ticker" aria-hidden="true">
+        <div class="hero__ticker-track">
+          <span class="hero__ticker-group">
+            Software Developer <i>✦</i> Full-Stack Engineer <i>✦</i> Building digital experiences <i>✦</i> Problem Solver <i>✦</i>
+          </span>
+          <span class="hero__ticker-group">
+            Software Developer <i>✦</i> Full-Stack Engineer <i>✦</i> Building digital experiences <i>✦</i> Problem Solver <i>✦</i>
+          </span>
+        </div>
+      </div>
 
       <div class="hero__coordinates" aria-hidden="true">
         <span>11.1271° N</span>

@@ -1,6 +1,6 @@
 # Sudhan Raj M — 3D Developer Portfolio
 
-An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla JavaScript, Three.js, GSAP and ScrollTrigger**. The hero centres a 360° rotating portrait of Sudhan Raj M, floating in front of an interactive laptop workstation with a live code screen, orbiting holographic rings, floating syntax symbols and particles. Everything is rendered locally — no build step, no framework and no external runtime dependencies.
+An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla JavaScript, Three.js, GSAP and ScrollTrigger**. The homepage opens on an editorial, Lando Norris-inspired hero: an off-white canvas, oversized Anton typography, a lime accent (`#D2FF00`), animated curved lines and a 360° rotating portrait of Sudhan Raj M standing in front of a lime arch. Everything is rendered locally — no build step, no framework and no external runtime dependencies.
 
 ---
 
@@ -8,7 +8,7 @@ An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla 
 
 | Section | Highlights |
 | --- | --- |
-| **Hero** | Oversized gradient name signature behind the cut-out portrait, in the site's navy/cyan/violet palette; 360° rotating portrait (CSS 3D) with cursor-following light, soft shadow, hover-to-pause; interactive 3D laptop workstation, code screen, floating `{ }`, `</>`, `01` symbols, particles, mouse parallax, three CTAs |
+| **Hero** | Editorial light hero (off-white + charcoal + electric lime `#D2FF00`): oversized Anton name split over two lines, lime accent block behind `RAJ M`, abstract animated curved-line field, 360° rotating cut-out portrait standing in front of a lime arch, vertical social rail, lime ticker and GSAP masked line reveal + ScrollTrigger parallax |
 | **About** | Lazy-loaded 3D icosahedron profile object, tilt/spotlight card, factual intro and quick facts |
 | **Skills** | Frontend, Backend, Database and Programming cards with hover tilt and brand chips |
 | **Work** | Four projects with interactive 3D CSS previews, category filters and accessible case-study modals |
@@ -153,7 +153,7 @@ Because the site is fully static, Vercel serves `index.html` directly with no co
 | Hero portrait | Replace `assets/my-photo.png` (transparent PNG, portrait ratio ≈ 880 × 1142). Keep the filename so the HTML does not change |
 | Portrait size / speed / tilt | `style.css` → `.hero__portrait` (`--ph`), `@keyframes portraitSpin` (duration) and `script.js` → the `360° portrait` block |
 | Colours, spacing, fonts | `style.css` → `:root` custom properties |
-| 3D scene tuning | `three-scene.js` → `initHero()` / `initAbout()` |
+| 3D scene tuning | `three-scene.js` → `initAbout()` (the homepage hero is intentionally type-led and skips `initHero()`) |
 
 ---
 
@@ -164,12 +164,12 @@ Because the site is fully static, Vercel serves `index.html` directly with no co
 - **Custom cursor** with contextual labels on desktop fine-pointer devices only.
 - **GSAP reveal animations** with `once: true` ScrollTriggers and an IntersectionObserver fallback.
 - **3D tilt and spotlight** on skill cards, project previews and the code window.
-- **Hero name signature**: the name is set as an oversized signature layered behind the portrait, filled with the same `--cyan` → `--blue` → `--violet` gradient used across the page. All of its rules are scoped to `.hero`, so every other section is untouched.
-- **360° portrait**: a background-free cut-out of Sudhan rotates continuously around its vertical axis (28 s, CSS `rotateY` + `preserve-3d`). It has a mirrored, tinted back face, a cursor-following specular light, a soft ground shadow that narrows as it turns edge-on, a cyan light blade at the 90°/270° moments, and it pauses while hovered and resumes on leave. On tablets and phones it stacks above the headline and the desk composition is hidden.
+- **Editorial hero**: a self-contained light theme scoped to `.hero--nori`. The name is set in Anton at up to 330 px, split into two masked lines that slide up on load, with the lime highlight behind `RAJ M`. An SVG field of curved lines drifts with the pointer and parallaxes on scroll. Every new rule is scoped to `.hero--nori` / `body.hero-in-view`, and no `:root` token is redefined, so About, Skills, Work, Coding, Journey and Contact keep the site's navy/cyan design untouched. The fixed header, nav links, CTA and custom cursor invert to charcoal only while the hero is on screen, then return to the dark theme further down the page.
+- **360° portrait**: a background-free cut-out of Sudhan rotates continuously around its vertical axis (28 s, CSS `rotateY` + `preserve-3d`) in front of a lime arch. It has a mirrored, lime-tinted back face, a cursor-following specular light, layered drop shadows, a lime light blade at the 90°/270° moments, pointer tilt, and it pauses while hovered and resumes on leave. On tablets and phones it stacks below the headline.
 - **Project filters** (All / Platforms / Systems) and **case-study modal** with focus trapping, Escape-to-close and focus restoration.
 - **Contact form** validates name, email and message, then opens a pre-filled `mailto:` message. Nothing is sent to a third party.
-- **Reduced motion**: all animation loops are skipped, content is revealed immediately, the custom cursor is disabled and Three.js renders a single static frame.
-- **No WebGL**: `supportsWebGL()` adds `.no-webgl` and shows the pure-CSS laptop fallback.
+- **Reduced motion**: all animation loops are skipped, the name lines, ticker and dashed curve animation stop, content is revealed immediately, the custom cursor is disabled and Three.js renders a single static frame.
+- **No WebGL**: `supportsWebGL()` adds `.no-webgl`; the homepage hero is pure CSS/SVG and needs no WebGL at all, while the About object falls back to a static state.
 - **No GSAP**: `.no-gsap` keeps all critical text visible.
 - **No JavaScript**: a `<noscript>` rule hides the loader and reveals all content.
 
@@ -183,8 +183,8 @@ Verified locally with Chrome DevTools Protocol at 390 × 844, 768 × 1024 and 14
 - [x] No horizontal scrolling at any breakpoint
 - [x] All internal anchors resolve to real sections
 - [x] No broken images or missing assets
-- [x] Hero entrance animation completes; name, roles, tagline, description, CTAs and meta are visible
-- [x] 3D laptop renders its code screen (texture depth offsets and sRGB encoding fixed)
+- [x] Hero entrance animation completes; name lines, tagline, CTAs, meta, portrait and social rail are visible
+- [x] About 3D profile object initialises and renders while the hero stays CSS/SVG only
 - [x] Portrait rotates continuously, pauses on hover and resumes on leave
 - [x] Portrait tilt follows the pointer and the specular light tracks the cursor
 - [x] Portrait cut-out keeps the original face pixels (background/edge only, no generative edits)
