@@ -197,6 +197,14 @@
         </div>
 
         <div class="hero__layout">
+          <!-- Depth weave: the wordmark is drawn twice. "Sudhan" sits behind the
+               portrait, while "Raj M" is painted in front of it, so the line
+               appears to pass through the photo. -->
+          <div class="hero__weave" aria-hidden="true">
+            <span class="hero__weave-word hero__weave-word--back"><span class="hero__weave-part">Sudhan</span> <span class="hero__weave-part">Raj M</span></span>
+            <span class="hero__weave-word hero__weave-word--front"><span class="hero__weave-part hero__weave-part--ghost">Sudhan</span> <span class="hero__weave-part">Raj M</span></span>
+          </div>
+
           <div class="hero__content">
             <h1 class="hero__title" id="heroTitle" aria-label="Sudhan Raj M">
               <span class="hero__hello">Software Developer</span>

@@ -3782,6 +3782,7 @@ body.custom-cursor-active textarea { cursor: text; }
   .hero__scroll,
   .hero__hud,
   .hero__nameplate,
+  .hero__weave,
   .marquee,
   .coding__symbols,
   .contact__orb,
@@ -4395,11 +4396,61 @@ body.custom-cursor-active textarea { cursor: text; }
 
 .hero--nori .hero__coordinates { display: none; }
 
-/* ---------- 24h. Responsive ---------- */
+/* ---------- 24h. Depth weave ---------- */
+/* The wordmark is painted twice from the same box: a faint back copy that the
+   portrait covers, and a brighter front copy where "Raj M" is the only visible
+   part, so the line reads as threading through the photo. The front copy sits
+   above .hero__portrait-wrap (z 3) but is inserted before .hero__content in the
+   DOM, so the headline, tagline and buttons always stay on top of it. */
+.hero--nori .hero__weave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero--nori .hero__weave-word {
+  position: absolute;
+  right: 2%;
+  bottom: clamp(84px, 13vh, 126px);
+  display: block;
+  margin: 0;
+  font-family: "Anton", var(--font-display);
+  font-size: clamp(92px, 11vw, 158px);
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(137, 174, 255, 0.34);
+  user-select: none;
+}
+
+.hero--nori .hero__weave-word--back { z-index: 1; }
+
+/* The forward slice keeps the same hairline weight as the back copy, but adds a
+   tight dark contour so the line stays readable on the white shirt and the cyan
+   arch instead of turning into a solid block. */
+.hero--nori .hero__weave-word--front {
+  z-index: 4;
+  -webkit-text-stroke: 1.5px rgba(240, 248, 255, 0.88);
+  filter:
+    drop-shadow(0 0 2px rgba(4, 7, 17, 0.9))
+    drop-shadow(0 0 12px rgba(4, 7, 17, 0.55))
+    drop-shadow(0 0 30px rgba(34, 211, 238, 0.22));
+}
+
+.hero--nori .hero__weave-part--ghost { visibility: hidden; }
+
+/* ---------- 24i. Responsive ---------- */
 @media (max-width: 1180px) {
   .hero--nori .hero__portrait-wrap { right: 8%; }
   .hero--nori .hero__content { width: min(64%, 700px); }
   .hero--nori .hero__name { font-size: clamp(58px, min(17.6vw, 25vh), 280px); }
+  /* Below this width the content column reaches into the portrait, leaving no
+     clear lane for the woven wordmark. */
+  .hero--nori .hero__weave { display: none; }
 }
 
 /* Short laptop screens: keep everything above the ticker. */
@@ -4432,6 +4483,9 @@ body.custom-cursor-active textarea { cursor: text; }
   }
 
   .hero--nori .hero__content { display: contents; }
+
+  /* The stacked mobile lockup has no shared plane for the weave. */
+  .hero--nori .hero__weave { display: none; }
 
   .hero--nori .hero__title { order: 1; width: 100%; }
   .hero--nori .hero__name { font-size: clamp(56px, 17vw, 148px); }
@@ -4513,7 +4567,7 @@ body.custom-cursor-active textarea { cursor: text; }
   .hero--nori .hero__portrait { --ph: clamp(250px, 56vw, 330px); }
 }
 
-/* ---------- 24i. Motion preferences ---------- */
+/* ---------- 24j. Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
   .hero--nori .hero__curve--dash,
   .hero--nori .hero__ticker-track,
