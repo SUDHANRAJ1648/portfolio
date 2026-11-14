@@ -32,7 +32,6 @@
 
   function setScrollLock(locked) {
     body.style.overflow = locked ? 'hidden' : '';
-    body.classList.toggle('menu-open', Boolean(locked));
   }
 
   /* ---------------------------------------------------------------------
@@ -158,23 +157,6 @@
   window.addEventListener('scroll', requestScrollFrame, { passive: true });
   window.addEventListener('resize', requestScrollFrame, { passive: true });
   onScrollFrame();
-
-  /* The editorial hero is light, so the fixed header and cursor invert while
-     it is on screen, then return to the site's dark styling further down. */
-  var heroViewport = $('.hero');
-
-  function syncHeroView() {
-    if (!heroViewport) return;
-    /* Stay light until the hero has fully left the viewport, so the dark header
-       never appears on top of the light hero while it is still visible. */
-    var limit = heroViewport.offsetHeight - 2;
-    var y = window.scrollY || window.pageYOffset;
-    body.classList.toggle('hero-in-view', y < limit);
-  }
-
-  window.addEventListener('scroll', syncHeroView, { passive: true });
-  window.addEventListener('resize', syncHeroView, { passive: true });
-  syncHeroView();
 
   var navLinks = $$('.nav-link');
   var sections = $$('main section[id]');
