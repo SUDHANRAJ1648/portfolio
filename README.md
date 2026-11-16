@@ -1,6 +1,6 @@
 # Sudhan Raj M — 3D Developer Portfolio
 
-An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla JavaScript, Three.js, GSAP and ScrollTrigger**. The homepage opens on an editorial, Lando Norris-inspired hero rebuilt in the site's dark palette: a near-black canvas, oversized Anton typography, a cyan-to-blue accent plate (`linear-gradient(100deg, #1d7fff, #22d3ee)`), animated curved lines and a 360° rotating portrait of Sudhan Raj M standing in front of a cyan/blue arch. Everything is rendered locally - no build step, no framework and no external runtime dependencies.
+An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla JavaScript, Three.js, GSAP and ScrollTrigger**. The homepage opens on an editorial, Lando Norris-inspired hero rebuilt in the site's dark palette: a near-black canvas, oversized Anton typography, a cyan-to-blue accent plate (`linear-gradient(100deg, #1d7fff, #22d3ee)`), animated curved lines and a static cut-out portrait of Sudhan Raj M standing in front of a cyan/blue arch. Everything is rendered locally - no build step, no framework and no external runtime dependencies.
 
 ---
 
@@ -8,7 +8,7 @@ An immersive, single-page developer portfolio built with **HTML5, CSS3, vanilla 
 
 | Section | Highlights |
 | --- | --- |
-| **Hero** | Editorial dark hero sharing the site palette (`--bg` `#040711`, `--text`, `--muted`, `--cyan`, `--blue`): oversized Anton name split over two lines, a cyan-to-blue accent plate behind `RAJ M`, abstract animated curved-line field, 360° rotating cut-out portrait standing in front of a cyan/blue arch, a layered ghost wordmark that threads behind and in front of the portrait, vertical social rail, a ticker band matched to the tech marquee, and GSAP masked line reveal + ScrollTrigger parallax |
+| **Hero** | Editorial dark hero sharing the site palette (`--bg` `#040711`, `--text`, `--muted`, `--cyan`, `--blue`): oversized Anton name split over two lines, a cyan-to-blue accent plate behind `RAJ M`, abstract animated curved-line field, static cut-out portrait standing in front of a cyan/blue arch, a layered ghost wordmark that threads behind and in front of the portrait, vertical social rail, a ticker band matched to the tech marquee, and GSAP masked line reveal + ScrollTrigger parallax |
 | **About** | Lazy-loaded 3D icosahedron profile object, tilt/spotlight card, factual intro and quick facts |
 | **Skills** | Frontend, Backend, Database and Programming cards with hover tilt and brand chips |
 | **Work** | Four projects with interactive 3D CSS previews, category filters and accessible case-study modals |
@@ -37,7 +37,7 @@ portfolio/
 ├── script.js                           # Loader, nav, cursor, tilt, filters, modal, form, GSAP
 ├── three-scene.js                      # Hero workstation + About object (Three.js r128)
 ├── assets/
-│   ├── my-photo.png                    # Cut-out portrait (transparent PNG) used by the 360° hero
+│   ├── my-photo.png                    # Cut-out portrait (transparent PNG) used by the hero
 │   ├── favicon.svg
 │   ├── resume/
 │   │   ├── Sudhan_Raj_M_Resume.pdf     # Single-page A4 resume (Download Resume target)
@@ -151,7 +151,7 @@ Because the site is fully static, Vercel serves `index.html` directly with no co
 | Social links | `index.html` header, contact and footer; update the JSON-LD `sameAs` block too |
 | Resume PDF | Replace `assets/resume/Sudhan_Raj_M_Resume.pdf` (keep the same filename) |
 | Hero portrait | Replace `assets/my-photo.png` (transparent PNG, portrait ratio ≈ 880 × 1142). Keep the filename so the HTML does not change |
-| Portrait size / speed / tilt | `style.css` → `.hero__portrait` (`--ph`), `@keyframes portraitSpin` (duration) and `script.js` → the `360° portrait` block |
+| Portrait size and placement | `style.css` → `.hero--nori .hero__portrait` (`--ph`) and `.hero--nori .hero__portrait-wrap` (`top`, `right`) |
 | Colours, spacing, fonts | `style.css` → `:root` custom properties |
 | 3D scene tuning | `three-scene.js` → `initAbout()` (the homepage hero is intentionally type-led and skips `initHero()`) |
 
@@ -166,7 +166,7 @@ Because the site is fully static, Vercel serves `index.html` directly with no co
 - **3D tilt and spotlight** on skill cards, project previews and the code window.
 - **Editorial hero**: the Lando-inspired layout rebuilt in the site's dark theme and scoped to `.hero--nori`. Colours come straight from the `:root` tokens (`--bg`, `--text`, `--muted`, `--cyan`, `--blue`, `--line`) plus `--ink-on-accent` for text on accent fills, so the hero is the same continuous `#040711` surface as the rest of the page - no light/dark seam at the top, at the ticker or at the hero-to-marquee boundary. The name is set in Anton at up to 330 px, split into two masked lines that slide up on load, with the cyan-to-blue plate behind `RAJ M`. An SVG field of curved lines drifts with the pointer and parallaxes on scroll. The fixed header, nav links, CTA and custom cursor keep their normal dark styling the whole way down (the old light-mode inversion was removed), and every section background is a transparent edge-fading gradient over `body`, so About, Skills, Work, Coding, Journey and Contact flow together with no visible bands.
 - **Depth weave**: the hero paints an oversized Anton ghost of `SUDHAN RAJ M` twice from the same box. A faint back copy (z-index 1) sits behind the portrait, so the photo swallows `HAN`; a second copy with a lit hairline and a tight dark contour (z-index 4) renders only `RAJ M` in front of the shirt and arch. The result reads as one line threading through the photo. The layer is decorative (`aria-hidden`, no pointer events, excluded from print), keeps the dark palette, paints below the headline and CTAs, and is hidden below 1181 px where the hero stacks and has no shared plane.
-- **360° portrait**: a background-free cut-out of Sudhan rotates continuously around its vertical axis (28 s, CSS `rotateY` + `preserve-3d`) in front of a cyan/blue arch. It has a mirrored, cyan-tinted back face, a cursor-following specular light, layered drop shadows, a cyan light blade at the 90°/270° moments, pointer tilt, and it pauses while hovered and resumes on leave. On tablets and phones it stacks below the headline.
+- **Static portrait**: a background-free cut-out of Sudhan stands upright in front of a cyan/blue arch, its optical centre lined up with the headline block on desktop. It keeps the soft specular highlight, layered drop shadows and contact shadow, while the ambient aura and curved-line field drift a few pixels with the pointer. There is no rotation, no tilt and no hover-to-pause. On tablets and phones it stacks below the headline.
 - **Project filters** (All / Platforms / Systems) and **case-study modal** with focus trapping, Escape-to-close and focus restoration.
 - **Contact form** validates name, email and message, then opens a pre-filled `mailto:` message. Nothing is sent to a third party.
 - **Reduced motion**: all animation loops are skipped, the name lines, ticker and dashed curve animation stop, content is revealed immediately, the custom cursor is disabled and Three.js renders a single static frame.
@@ -186,8 +186,8 @@ Verified locally with Chrome DevTools Protocol at 390 × 844, 768 × 1024 and 14
 - [x] No broken images or missing assets
 - [x] Hero entrance animation completes; name lines, tagline, CTAs, meta, portrait and social rail are visible
 - [x] About 3D profile object initialises and renders while the hero stays CSS/SVG only
-- [x] Portrait rotates continuously, pauses on hover and resumes on leave
-- [x] Portrait tilt follows the pointer and the specular light tracks the cursor
+- [x] Portrait stays upright (no rotation, tilt or hover-to-pause)
+- [x] Portrait is centred on the headline block on desktop and stacks below it on small screens
 - [x] Portrait cut-out keeps the original face pixels (background/edge only, no generative edits)
 - [x] Project filters show the correct 2 of 4 cards per category
 - [x] Case-study modal opens, populates (title, 4–6 highlights, stack, actions) and closes with Escape

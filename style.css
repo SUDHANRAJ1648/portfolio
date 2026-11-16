@@ -933,7 +933,7 @@ body.custom-cursor-active textarea { cursor: text; }
 
 .hero__content { width: 100%; max-width: 680px; }
 
-/* ---------- 9b. 360° portrait ---------- */
+/* ---------- 9b. Portrait ---------- */
 .hero__portrait {
   --ph: clamp(360px, 62vh, 620px);
   --pw: calc(var(--ph) * 0.771);
@@ -954,12 +954,9 @@ body.custom-cursor-active textarea { cursor: text; }
   position: relative;
   width: var(--pw);
   height: var(--ph);
-  perspective: 1500px;
-  perspective-origin: 50% 44%;
-  transform-style: preserve-3d;
 }
 
-/* Glowing silhouette behind the portrait — always visible, even edge-on */
+/* Glowing silhouette behind the portrait */
 .portrait__aura {
   position: absolute;
   inset: -6% -10% 0;
@@ -986,74 +983,10 @@ body.custom-cursor-active textarea { cursor: text; }
   opacity: 0.95;
 }
 
-.portrait__tilt {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform:
-    rotateX(var(--prx, 0deg))
-    rotateY(var(--pry, 0deg))
-    translate3d(var(--psx, 0px), var(--psy, 0px), 0);
-}
-
-.portrait__spin {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  animation: portraitSpin 28s linear infinite;
-  will-change: transform;
-}
-
-.hero__portrait:hover .portrait__spin,
-.hero__portrait.is-paused .portrait__spin {
-  animation-play-state: paused;
-}
-
-@keyframes portraitSpin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
-}
-
-/* Light blade that fills the frame while the slab is edge-on */
-.portrait__edge {
-  position: absolute;
-  left: 50%;
-  top: 3%;
-  width: 3px;
-  height: 94%;
-  margin-left: -1.5px;
-  z-index: 2;
-  pointer-events: none;
-  border-radius: 4px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(186, 240, 255, 0.95) 16%,
-    #67e8f9 50%,
-    rgba(186, 240, 255, 0.95) 84%,
-    transparent
-  );
-  box-shadow:
-    0 0 16px rgba(103, 232, 249, 0.85),
-    0 0 44px rgba(59, 130, 246, 0.55);
-  opacity: 0;
-  transform: scaleY(0.86);
-  animation: portraitEdge 28s linear infinite;
-  will-change: transform, opacity;
-}
-
-@keyframes portraitEdge {
-  0%, 21%, 29%, 71%, 79%, 100% { opacity: 0; transform: scaleY(0.86); }
-  25%, 75% { opacity: 1; transform: scaleY(1); }
-}
-
 .portrait__face {
   position: absolute;
   inset: 0;
   margin: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
 }
 
 .portrait__face img {
@@ -1065,42 +998,6 @@ body.custom-cursor-active textarea { cursor: text; }
   pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
-}
-
-.portrait__face--front { transform: translateZ(0.6px); }
-
-.portrait__face--front img {
-  filter:
-    drop-shadow(0 30px 44px rgba(2, 5, 16, 0.62))
-    drop-shadow(0 4px 14px rgba(2, 5, 16, 0.45))
-    drop-shadow(0 0 26px rgba(34, 211, 238, 0.16));
-}
-
-.portrait__face--back {
-  transform: rotateY(180deg) translateZ(0.6px);
-}
-
-.portrait__face--back img {
-  filter:
-    brightness(0.46)
-    saturate(0.7)
-    drop-shadow(0 22px 38px rgba(2, 5, 16, 0.55));
-}
-
-.portrait__face--back::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(200deg, rgba(103, 232, 249, 0.55), rgba(37, 99, 235, 0.5));
-  mix-blend-mode: color;
-  opacity: 0.55;
-  -webkit-mask-image: url("assets/my-photo.png");
-  mask-image: url("assets/my-photo.png");
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
 }
 
 /* Cursor-following specular light, clipped to the silhouette */
@@ -1124,43 +1021,7 @@ body.custom-cursor-active textarea { cursor: text; }
   mask-repeat: no-repeat;
 }
 
-.portrait__light--soft {
-  mix-blend-mode: screen;
-  opacity: 0.22;
-}
-
-/* Slow holographic scan */
-.portrait__scan {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    transparent 40%,
-    rgba(103, 232, 249, 0.18) 47%,
-    rgba(255, 255, 255, 0.10) 50%,
-    rgba(103, 232, 249, 0.14) 53%,
-    transparent 60%
-  );
-  mix-blend-mode: screen;
-  opacity: 0;
-  animation: portraitScan 7.5s ease-in-out 1.6s infinite;
-  -webkit-mask-image: url("assets/my-photo.png");
-  mask-image: url("assets/my-photo.png");
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
-@keyframes portraitScan {
-  0% { transform: translateY(-34%); opacity: 0; }
-  12% { opacity: 0.85; }
-  78% { opacity: 0.85; }
-  92%, 100% { transform: translateY(34%); opacity: 0; }
-}
-
-/* Contact shadow that reacts to the rotation */
+/* Contact shadow under the portrait */
 .portrait__shadow {
   position: absolute;
   left: 50%;
@@ -1175,13 +1036,6 @@ body.custom-cursor-active textarea { cursor: text; }
     radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0, 0, 0, 0.82), rgba(4, 10, 26, 0.30) 52%, transparent 74%),
     radial-gradient(ellipse 46% 90% at 50% 50%, rgba(34, 211, 238, 0.22), transparent 76%);
   filter: blur(9px);
-  animation: portraitShadow 28s linear infinite;
-  will-change: transform, opacity;
-}
-
-@keyframes portraitShadow {
-  0%, 50%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.95; }
-  25%, 75% { transform: translateX(-50%) scaleX(0.34); opacity: 0.5; }
 }
 
 .portrait__tag {
@@ -1212,14 +1066,6 @@ body.custom-cursor-active textarea { cursor: text; }
   background: var(--cyan);
   box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
   animation: portraitPulse 2.6s ease-in-out infinite;
-}
-
-/* Hover copy only makes sense on devices that can actually hover */
-.portrait__tag-touch { display: none; }
-
-@media (hover: none) {
-  .portrait__tag-hover { display: none; }
-  .portrait__tag-touch { display: inline; }
 }
 
 @keyframes portraitPulse {
@@ -3649,15 +3495,9 @@ body.custom-cursor-active textarea { cursor: text; }
   .contact__orb-ring,
   .loader__ring { animation: none; }
 
-  .portrait__spin,
   .portrait__shadow,
-  .portrait__scan,
-  .portrait__edge,
   .portrait__tag-dot { animation: none !important; }
   .portrait__shadow { transform: translateX(-50%) scaleX(1); opacity: 0.9; }
-  .portrait__scan,
-  .portrait__edge { display: none; }
-  .portrait__tilt { transform: none; }
 }
 
 /* If GSAP fails to load, keep content visible. */
@@ -4143,11 +3983,16 @@ body.custom-cursor-active textarea { cursor: text; }
 /* ---------- 24e. Portrait ---------- */
 .hero--nori .hero__portrait-wrap {
   position: absolute;
+  /* Sit the portrait's optical centre on the headline block: 41% of the hero
+     layout, lifted by half its own height. `translate` is used instead of
+     `transform` so the GSAP scroll parallax below can keep writing transform. */
+  top: 41%;
+  bottom: auto;
   right: 12%;
-  bottom: 0;
   z-index: 3;
   display: flex;
   justify-content: center;
+  translate: 0 -50%;
   will-change: transform;
 }
 
@@ -4226,19 +4071,6 @@ body.custom-cursor-active textarea { cursor: text; }
     drop-shadow(0 0 30px rgba(34, 211, 238, 0.22));
 }
 
-.hero--nori .portrait__face--back img {
-  filter:
-    brightness(0.5)
-    saturate(0.45)
-    drop-shadow(0 26px 40px rgba(0, 0, 0, 0.55));
-}
-
-.hero--nori .portrait__face--back::after {
-  background: linear-gradient(200deg, #22d3ee, #3b82f6);
-  mix-blend-mode: color;
-  opacity: 0.8;
-}
-
 .hero--nori .portrait__light {
   background: radial-gradient(
     circle 46% at var(--mx) var(--my),
@@ -4248,22 +4080,6 @@ body.custom-cursor-active textarea { cursor: text; }
   );
   mix-blend-mode: soft-light;
   opacity: 0.95;
-}
-
-.hero--nori .portrait__scan { display: none; }
-
-.hero--nori .portrait__edge {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(103, 232, 249, 0.95) 16%,
-    #22d3ee 50%,
-    rgba(103, 232, 249, 0.95) 84%,
-    transparent
-  );
-  box-shadow:
-    0 0 16px rgba(34, 211, 238, 0.85),
-    0 0 46px rgba(29, 127, 255, 0.5);
 }
 
 .hero--nori .portrait__shadow {
@@ -4493,9 +4309,11 @@ body.custom-cursor-active textarea { cursor: text; }
   .hero--nori .hero__portrait-wrap {
     order: 2;
     position: relative;
+    top: auto;
     right: auto;
     bottom: auto;
     width: 100%;
+    translate: none;
     margin-top: clamp(-72px, -6.6vw, -20px);
   }
 

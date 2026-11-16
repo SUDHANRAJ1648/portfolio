@@ -320,13 +320,11 @@
 
         dot.style.transform = 'translate3d(' + mouse.x + 'px, ' + mouse.y + 'px, 0)';
 
-        var interactive = event.target.closest('a, button, [data-tilt], .project-frame, .code-window, .hero__portrait');
+        var interactive = event.target.closest('a, button, [data-tilt], .project-frame, .code-window');
         if (interactive) {
           cursor.classList.add('is-hover');
           if (cursorText) {
-            if (interactive.classList.contains('hero__portrait')) {
-              cursorText.textContent = '360°';
-            } else if (interactive.classList.contains('project-frame') || interactive.hasAttribute('data-tilt')) {
+            if (interactive.classList.contains('project-frame') || interactive.hasAttribute('data-tilt')) {
               cursorText.textContent = 'inspect';
             } else if (interactive.tagName === 'A') {
               cursorText.textContent = 'open';
@@ -403,29 +401,21 @@
   }
 
   /* ---------------------------------------------------------------------
-     360° portrait — pointer tilt, parallax and dynamic lighting
+     Portrait — ambient pointer drift (the portrait itself stays static)
      --------------------------------------------------------------------- */
   var portrait = $('#portrait');
   var heroSection = $('.hero');
   if (portrait && heroSection && finePointer && !reduceMotion) {
     var pAura = $('.portrait__aura', portrait);
     var pHalo = $('.portrait__halo', portrait);
-    var pName = $('.hero__nameplate', portrait);
     var pCurvesSvg = $('.hero__curves-svg', heroSection);
-    var pTargetRX = 0, pTargetRY = 0, pTargetX = 0, pTargetY = 0;
-    var pCurRX = 0, pCurRY = 0, pCurX = 0, pCurY = 0;
+    var pTargetX = 0, pTargetY = 0;
+    var pCurX = 0, pCurY = 0;
     var pRaf = null;
 
     function portraitFrame() {
-      pCurRX += (pTargetRX - pCurRX) * 0.1;
-      pCurRY += (pTargetRY - pCurRY) * 0.1;
       pCurX += (pTargetX - pCurX) * 0.075;
       pCurY += (pTargetY - pCurY) * 0.075;
-
-      portrait.style.setProperty('--prx', pCurRX.toFixed(2) + 'deg');
-      portrait.style.setProperty('--pry', pCurRY.toFixed(2) + 'deg');
-      portrait.style.setProperty('--psx', pCurX.toFixed(2) + 'px');
-      portrait.style.setProperty('--psy', pCurY.toFixed(2) + 'px');
 
       if (pAura) {
         pAura.style.transform = 'translate3d(' + (pCurX * -1.5).toFixed(2) + 'px, ' + (pCurY * -1.5).toFixed(2) + 'px, 0)';
@@ -437,13 +427,8 @@
         /* The line field drifts against the pointer, one layer behind the portrait */
         pCurvesSvg.style.transform = 'translate3d(' + (pCurX * -1.15).toFixed(2) + 'px, ' + (pCurY * -0.85).toFixed(2) + 'px, 0)';
       }
-      if (pName) {
-        pName.style.setProperty('--nptx', (pCurX * -0.85).toFixed(2) + 'px');
-        pName.style.setProperty('--npty', (pCurY * -0.7).toFixed(2) + 'px');
-      }
 
-      if (Math.abs(pTargetRX - pCurRX) > 0.02 || Math.abs(pTargetRY - pCurRY) > 0.02 ||
-          Math.abs(pTargetX - pCurX) > 0.05 || Math.abs(pTargetY - pCurY) > 0.05) {
+      if (Math.abs(pTargetX - pCurX) > 0.05 || Math.abs(pTargetY - pCurY) > 0.05) {
         pRaf = window.requestAnimationFrame(portraitFrame);
       } else {
         pRaf = null;
@@ -461,23 +446,13 @@
       var hx = (event.clientX - heroRect.left) / heroRect.width;
       var hy = (event.clientY - heroRect.top) / heroRect.height;
 
-      pTargetRY = Math.max(-1, Math.min(1, hx - 0.5)) * 20;
-      pTargetRX = Math.max(-1, Math.min(1, 0.5 - hy)) * 13;
       pTargetX = (hx - 0.5) * 16;
       pTargetY = (hy - 0.5) * 12;
-
-      var pRect = portrait.getBoundingClientRect();
-      var px = Math.max(-0.25, Math.min(1.25, (event.clientX - pRect.left) / pRect.width));
-      var py = Math.max(-0.25, Math.min(1.25, (event.clientY - pRect.top) / pRect.height));
-      portrait.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
-      portrait.style.setProperty('--my', (py * 100).toFixed(1) + '%');
 
       startPortrait();
     }, { passive: true });
 
     heroSection.addEventListener('pointerleave', function () {
-      pTargetRX = 0;
-      pTargetRY = 0;
       pTargetX = 0;
       pTargetY = 0;
       startPortrait();
